@@ -1,9 +1,21 @@
-import express, {Response, Request, NextFunction} from "express"
+import express, { Response, Request } from "express";
+import { router as authRoutes } from "./routes/auth-routes";
+import * as dotenv from "dotenv";
 
-const app : express.Application = express()
+dotenv.config({ path: "./config/config.env" });
 
-const add = (a : number, b : number):number => a + b
+const app: express.Application = express();
 
-app.get("/", (req : Request, res: Response) => res.send("hello"))
+const PORT = process.env.PORT || 5000;
 
-app.listen(5000, () => console.log("*** Server running on port 5000 ***"))
+app.set("view engine", "ejs");
+app.get("/", (req: Request, res: Response) => {
+    res.render("home");
+});
+
+app.use("/auth", authRoutes);
+app.listen(PORT, () =>
+    console.log(
+        `*** Server running in ${process.env.NODE_ENV} on port ${PORT} ***`
+    )
+);
