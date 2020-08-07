@@ -3,7 +3,7 @@ import { Router, Request, Response } from "express";
 export const router = Router();
 
 router.get("/login", (req: Request, res: Response) => {
-    res.render("login");
+    res.render("login", { layout: "login" });
 });
 
 router.get("/logout", (req: Request, res: Response) => {

@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "cross-env NODE_ENV=production node dist/app.js",
-    "dev": "cross-env NODE_ENV=development nodemon src/app.ts",
+    "dev": "cross-env NODE_ENV=development nodemon app.ts",
     "build": "tsc -p ."
   },
   "repository": {
@@ -20,6 +20,8 @@
   },
   "homepage": "https://github.com/armandoroman1016/be-word-lyst#readme",
   "dependencies": {
+    "@types/express-handlebars": "^3.1.0",
+    "@types/mongoose": "^5.7.35",
     "connect-mongo": "^3.2.0",
     "dotenv": "^8.2.0",
     "ejs": "^3.1.3",
