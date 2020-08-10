@@ -1,9 +1,10 @@
 import { Router, Request, Response } from "express";
+import passport from "passport";
 
 export const router = Router();
 
 router.get("/login", (req: Request, res: Response) => {
-    res.render("login");
+    res.render("login", { layout: "login" });
 });
 
 router.get("/logout", (req: Request, res: Response) => {
@@ -11,7 +12,10 @@ router.get("/logout", (req: Request, res: Response) => {
 });
 
 // auth with google
-router.get("/google", (req: Request, res: Response) => {
-    // handle with passport
-    res.send("login with google");
-});
+router.get("/google", passport.authenticate("google", { scope: ["profile"] }));
+
+router.get(
+    "/google/callback",
+    passport.authenticate("google", { failureRedirect: "/" }),
+    (req, res) => res.redirect("/dashboard")
+);
